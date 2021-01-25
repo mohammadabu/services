@@ -74,7 +74,7 @@ class Services(models.Model):
         return vals.get('alias_model', 'services.task')
 
     def get_alias_values(self):
-        values = super(services, self).get_alias_values()
+        values = super(Services, self).get_alias_values()
         values['alias_defaults'] = {'services_id': self.id}
         return values
 
