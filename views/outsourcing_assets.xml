@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <template id="assets_backend" name="services assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/services/static/src/css/services.css"/>
+                <script type="text/javascript" src="/services/static/src/js/services.js"></script>
+                <script type="text/javascript" src="/services/static/src/js/services_task_kanban_examples.js"></script>
+                <script type="text/javascript" src="/services/static/src/js/tours/services.js"></script>
+                <link rel="stylesheet" type="text/scss" href="/services/static/src/scss/services_dashboard.scss"/>
+            </xpath>
+        </template>
+
+        <template id="assets_frontend" inherit_id="web.assets_frontend" name="Rating services Assets">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" type="text/scss" href="/services/static/src/scss/portal_rating.scss"/>
+                <script type="text/javascript" src="/services/static/src/js/portal_rating.js"/>
+            </xpath>
+        </template>
+</odoo>

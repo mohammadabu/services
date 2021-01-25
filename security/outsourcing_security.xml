@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="module_category_operations_services" model="ir.module.category">
+        <field name="name">services</field>
+        <field name="description">Helps you manage your servicess and tasks by tracking them, generating plannings, etc...</field>
+        <field name="sequence">3</field>
+    </record>
+    <record id="group_services_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="category_id" ref="services.module_category_operations_services"/>
+    </record>
+
+    <record id="group_services_manager" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="services.module_category_operations_services"/>
+        <field name="implied_ids" eval="[(4, ref('group_services_user'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+    <record id="group_subtask_services" model="res.groups">
+        <field name="name">Use Subtasks on services</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <record id="group_services_rating" model="res.groups">
+        <field name="name">Use Rating on services</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+<!-- <data noupdate="1">
+    <record id="base.default_user" model="res.users">
+        <field name="groups_id" eval="[(4,ref('services.group_services_manager'))]"/>
+    </record>
+
+    <record model="ir.rule" id="services_comp_rule">
+        <field name="name">services: multi-company</field>
+        <field name="model_id" ref="model_services_services"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record model="ir.rule" id="services_services_manager_rule">
+        <field name="name">services: services manager: see all</field>
+        <field name="model_id" ref="model_services_services"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4,ref('services.group_services_manager'))]"/>
+    </record>
+
+    <record model="ir.rule" id="services_public_members_rule">
+        <field name="name">services: employees: following required for follower-only servicess</field>
+        <field name="model_id" ref="model_services_services"/>
+        <field name="domain_force">['|',
+                                        ('privacy_visibility', '!=', 'followers'),
+                                        '|','|',
+                                            ('message_partner_ids', 'in', [user.partner_id.id]),
+                                            ('message_channel_ids', 'in', user.partner_id.channel_ids.ids),
+                                            ('task_ids.message_partner_ids', 'in', [user.partner_id.id]),
+                                    ]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="task_comp_rule">
+        <field name="name">services/Task: multi-company</field>
+        <field name="model_id" ref="model_services_task"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record model="ir.rule" id="task_visibility_rule">
+        <field name="name">services/Task: employees: follow required for follower-only servicess</field>
+        <field name="model_id" ref="model_services_task"/>
+        <field name="domain_force">[
+        '|',
+            ('services_id.privacy_visibility', '!=', 'followers'),
+            '|',
+                ('services_id.message_partner_ids', 'in', [user.partner_id.id]),
+                '|',
+                    ('message_partner_ids', 'in', [user.partner_id.id]),
+                    # to subscribe check access to the record, follower is not enough at creation
+                    ('user_id', '=', user.id)
+        ]</field>
+        <field name="groups" eval="[(4,ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="services_manager_all_services_tasks_rule">
+        <field name="name">services/Task: services manager: see all</field>
+        <field name="model_id" ref="model_services_task"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4,ref('services.group_services_manager'))]"/>
+    </record>
+
+    <record model="ir.rule" id="report_services_task_user_report_comp_rule">
+        <field name="name">Task Analysis multi-company</field>
+        <field name="model_id" ref="model_report_services_task_user"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="services_services_rule_portal" model="ir.rule">
+        <field name="name">services: portal users: portal and following</field>
+        <field name="model_id" ref="services.model_services_services"/>
+        <field name="domain_force">[
+            '&amp;',
+                ('privacy_visibility', '=', 'portal'),
+                ('message_partner_ids', 'child_of', [user.partner_id.commercial_partner_id.id]),
+        ]</field>
+        <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+    </record>
+
+    <record id="services_task_rule_portal" model="ir.rule">
+        <field name="name">services/Task: portal users: (portal and following services) or (portal and following task)</field>
+        <field name="model_id" ref="services.model_services_task"/>
+        <field name="domain_force">[
+        '|',
+            '&amp;',
+                ('services_id.privacy_visibility', '=', 'portal'),
+                ('services_id.message_partner_ids', 'child_of', [user.partner_id.commercial_partner_id.id]),
+            '&amp;',
+                ('services_id.privacy_visibility', '=', 'portal'),
+                ('message_partner_ids', 'child_of', [user.partner_id.commercial_partner_id.id]),
+        ]</field>
+        <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+    </record>
+
+</data> -->
+</odoo>

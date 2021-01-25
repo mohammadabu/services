@@ -1,0 +1,25 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_services_services,services.services,model_services_services,services.group_services_user,1,0,0,0
+access_services_services_manager,services.services,model_services_services,services.group_services_manager,1,1,1,1
+access_services_task_type_user,services.task.type.user,model_services_task_type,base.group_user,1,0,0,0
+access_services_task_type_services_user,services.task.type.services.user,model_services_task_type,services.group_services_user,1,0,0,0
+access_services_task_type_manager,services.task.type manager,model_services_task_type,services.group_services_manager,1,1,1,1
+access_services_task_type_portal,task_type_portal,services.model_services_task_type,base.group_portal,1,0,0,0
+access_services_task,services.task,model_services_task,services.group_services_user,1,1,1,1
+access_report_services_task_user,report.services.task.user,model_report_services_task_user,services.group_services_manager,1,1,1,1
+access_partner_task user,base.res.partner user,base.model_res_partner,services.group_services_user,1,0,0,0
+access_task_on_partner,services.task on partners,model_services_task,base.group_user,1,0,0,0
+access_task_portal,task_portal,services.model_services_task,base.group_portal,1,0,0,0
+access_services_user,services.services on partners,model_services_services,base.group_user,1,0,0,0
+access_services_portal,services_portal,services.model_services_services,base.group_portal,1,0,0,0
+access_resource_calendar,services.resource_calendar user,resource.model_resource_calendar,services.group_services_user,1,0,0,0
+access_resource_calendar_attendance,services.resource_calendar_attendance user,resource.model_resource_calendar_attendance,services.group_services_user,1,0,0,0
+access_resource_calendar_leaves_user,resource.calendar.leaves user,resource.model_resource_calendar_leaves,services.group_services_user,1,1,1,1
+access_services_tags_all,services.services_tags_all,model_services_tags,,1,0,0,0
+access_services_tags_manager,services.services_tags_manager,model_services_tags,services.group_services_manager,1,1,1,1
+access_services_tags_portal,services_tags_portal,services.model_services_tags,base.group_portal,1,0,0,0
+access_mail_alias,mail.alias,mail.model_mail_alias,services.group_services_manager,1,1,1,1
+access_mail_activity_type_services_manager,mail.activity.type.services.manager,mail.model_mail_activity_type,services.group_services_manager,1,1,1,1
+access_account_analytic_account_user,account.analytic.account,analytic.model_account_analytic_account,services.group_services_user,1,0,0,0
+access_account_analytic_account_manager,account.analytic.account,analytic.model_account_analytic_account,services.group_services_manager,1,1,1,1
+access_account_analytic_line_services,account.analytic.line services,analytic.model_account_analytic_line,services.group_services_manager,1,1,1,1
