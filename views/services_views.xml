@@ -200,7 +200,7 @@
                     <field name="name" string="Services"/>
                     <field name="user_id" string="Services Manager"/>
                     <field name="partner_id" string="Customer" filter_domain="[('partner_id', 'child_of', self)]"/>
-                    <filter string="My Favorites" name="my_servicess" domain="[('favorite_user_ids', 'in', uid)]"/>
+                    <filter string="My Favorites" name="my_services" domain="[('favorite_user_ids', 'in', uid)]"/>
                     <separator/>
                     <filter string="Followed" name="followed_by_me" domain="[('message_is_follower', '=', True)]"/>
                     <separator/>
@@ -217,7 +217,7 @@
             <field name="name">services.services.tree</field>
             <field name="model">services.services</field>
             <field name="arch" type="xml">
-                <tree decoration-bf="message_needaction==True" decoration-muted="active == False" string="Servicess">
+                <tree decoration-bf="message_needaction==True" decoration-muted="active == False" string="Services">
                     <field name="sequence" widget="handle"/>
                     <field name="message_needaction" invisible="1"/>
                     <field name="active" invisible="1"/>
@@ -397,7 +397,7 @@
         </record>
 
         <record id="open_view_services_all" model="ir.actions.act_window">
-            <field name="name">Servicess</field>
+            <field name="name">Services</field>
             <field name="res_model">services.services</field>
             <field name="domain">[]</field>
             <field name="view_mode">kanban,form</field>
@@ -414,7 +414,7 @@
         </record>
 
         <record id="open_view_services_all_config" model="ir.actions.act_window">
-            <field name="name">Servicess</field>
+            <field name="name">Services</field>
             <field name="res_model">services.services</field>
             <field name="domain">[]</field>
             <field name="view_mode">tree,kanban,form</field>
@@ -427,7 +427,7 @@
                 <p class="o_view_nocontent_empty_folder">
                     Create a new Services
                 </p><p>
-                    Organize your activities (plan tasks, track issues, invoice timesheets) for internal, personal or customer Servicess.
+                    Organize your activities (plan tasks, track issues, invoice timesheets) for internal, personal or customer Services.
                 </p>
             </field>
         </record>
@@ -918,8 +918,8 @@
 
         <menuitem action="open_task_type_form" id="menu_services_config_services" name="Stages" parent="menu_services_config" sequence="3" groups="base.group_no_one"/>
 
-        <menuitem action="open_view_services_all" id="menu_servicess" name="Servicess" parent="menu_main_pm" sequence="1"/>
-        <menuitem action="open_view_services_all_config" id="menu_servicess_config" name="servicess" parent="menu_services_config" sequence="10"/>
+        <menuitem action="open_view_services_all" id="menu_servicess" name="Services" parent="menu_main_pm" sequence="1"/>
+        <menuitem action="open_view_services_all_config" id="menu_servicess_config" name="Services" parent="menu_services_config" sequence="10"/>
 
         <!-- User Form -->
         <act_window context="{'search_default_user_id': [active_id], 'default_user_id': active_id}"
