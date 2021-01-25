@@ -31,7 +31,7 @@
         'views/services_rating_templates.xml',
         'data/digest_data.xml',
         'data/services_mail_template_data.xml',
-        # 'data/services_data.xml',
+        'data/services_data.xml',
     ],
     'test': [
     ],
