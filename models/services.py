@@ -9,7 +9,7 @@ from odoo.tools.safe_eval import safe_eval
 from odoo.tools.misc import format_date
 
 
-class servicesTaskType(models.Model):
+class ServicesTaskType(models.Model):
     _name = 'services.task.type'
     _description = 'Task Stage'
     _order = 'sequence, id'
@@ -58,10 +58,10 @@ class servicesTaskType(models.Model):
             if shared_stages and not tasks:
                 shared_stages.write({'services_ids': [(3, default_services_id)]})
                 stages = self.filtered(lambda x: x not in shared_stages)
-        return super(servicesTaskType, stages).unlink()
+        return super(ServicesTaskType, stages).unlink()
 
 
-class services(models.Model):
+class Services(models.Model):
     _name = "services.services"
     _description = "services"
     _inherit = ['portal.mixin', 'mail.alias.mixin', 'mail.thread', 'rating.parent.mixin']
@@ -226,12 +226,12 @@ class services(models.Model):
     ]
 
     def _compute_access_url(self):
-        super(services, self)._compute_access_url()
+        super(Services, self)._compute_access_url()
         for services in self:
             services.access_url = '/my/services/%s' % services.id
 
     def _compute_access_warning(self):
-        super(services, self)._compute_access_warning()
+        super(Services, self)._compute_access_warning()
         for services in self.filtered(lambda x: x.privacy_visibility != 'portal'):
             services.access_warning = _(
                 "The services cannot be shared with the recipient(s) because the privacy of the services is too restricted. Set the privacy to 'Visible by following customers' in order to make it accessible by the recipient(s).")
@@ -276,7 +276,7 @@ class services(models.Model):
             default = {}
         if not default.get('name'):
             default['name'] = _("%s (copy)") % (self.name)
-        services = super(services, self).copy(default)
+        services = super(Services, self).copy(default)
         if self.subtask_services_id == self:
             services.subtask_services_id = services
         for follower in self.message_follower_ids:
@@ -289,7 +289,7 @@ class services(models.Model):
     def create(self, vals):
         # Prevent double services creation
         self = self.with_context(mail_create_nosubscribe=True)
-        servicess = super(services, self).create(vals)
+        servicess = super(Services, self).create(vals)
         if not vals.get('subtask_services_id'):
             servicess.subtask_services_id = servicess.id
         if servicess.privacy_visibility == 'portal' and servicess.partner_id:
@@ -301,7 +301,7 @@ class services(models.Model):
         if 'is_favorite' in vals:
             vals.pop('is_favorite')
             self._fields['is_favorite'].determine_inverse(self)
-        res = super(services, self).write(vals) if vals else True
+        res = super(Services, self).write(vals) if vals else True
         if 'active' in vals:
             # archiving/unarchiving a services does it on its tasks, too
             self.with_context(active_test=False).mapped('tasks').write({'active': vals['active']})
@@ -320,13 +320,13 @@ class services(models.Model):
         for services in self:
             if services.analytic_account_id and not services.analytic_account_id.line_ids:
                 analytic_accounts_to_delete |= services.analytic_account_id
-        result = super(services, self).unlink()
+        result = super(Services, self).unlink()
         analytic_accounts_to_delete.unlink()
         return result
 
     def message_subscribe(self, partner_ids=None, channel_ids=None, subtype_ids=None):
         """ Subscribe to all existing active tasks when subscribing to a services """
-        res = super(services, self).message_subscribe(partner_ids=partner_ids, channel_ids=channel_ids, subtype_ids=subtype_ids)
+        res = super(Services, self).message_subscribe(partner_ids=partner_ids, channel_ids=channel_ids, subtype_ids=subtype_ids)
         services_subtypes = self.env['mail.message.subtype'].browse(subtype_ids) if subtype_ids else None
         task_subtypes = (services_subtypes.mapped('parent_id') | services_subtypes.filtered(lambda sub: sub.internal or sub.default)).ids if services_subtypes else None
         if not subtype_ids or task_subtypes:
@@ -337,7 +337,7 @@ class services(models.Model):
     def message_unsubscribe(self, partner_ids=None, channel_ids=None):
         """ Unsubscribe from all tasks when unsubscribing from a services """
         self.mapped('tasks').message_unsubscribe(partner_ids=partner_ids, channel_ids=channel_ids)
-        return super(services, self).message_unsubscribe(partner_ids=partner_ids, channel_ids=channel_ids)
+        return super(Services, self).message_unsubscribe(partner_ids=partner_ids, channel_ids=channel_ids)
 
     # ---------------------------------------------------
     #  Actions
