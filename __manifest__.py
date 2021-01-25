@@ -3,11 +3,6 @@
 
 {
     'name': 'services',
-    # 'version': '1.1',
-    # 'website': 'https://www.odoo.com/page/services-management',
-    # 'category': 'Operations/services',
-    # 'sequence': 10,
-    # 'summary': 'Organize and schedule your servicess ',
     'depends': [
         'analytic',
         'base_setup',
@@ -36,12 +31,8 @@
         'views/services_rating_templates.xml',
         'data/digest_data.xml',
         'data/services_mail_template_data.xml',
-        'data/services_data.xml',
+        # 'data/services_data.xml',
     ],
-    # 'demo': ['data/services_demo.xml'],
     'test': [
     ],
-    # 'installable': True,
-    # 'auto_install': False,
-    # 'application': True,
 }
