@@ -2,7 +2,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 {
-    'name': 'services',
+    'name': 'Services',
     'depends': [
         'analytic',
         'base_setup',
